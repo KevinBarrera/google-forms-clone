@@ -1,12 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { Link } from 'expo-router'
+import { useRouter } from 'expo-router'
+import { Button } from "react-native-paper";
 
 const Delivery = () => {
+  const router = useRouter();
+
+  const handleNavigation = () => {
+    router.push("/checkout/payment")
+  };
+
   return (
     <View>
       <Text>Delivery</Text>
-      <Link href={"checkout/payment"}>Go to payment</Link>
+      <Button onPress={handleNavigation} mode='contained'>Next</Button>
     </View>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+import { theme } from '../common/theme'
 
 const CheckoutStack = () => {
   return (
@@ -8,10 +9,10 @@ const CheckoutStack = () => {
       <StatusBar style='light' />
       <Stack
         screenOptions={{
-          contentStyle: { flex: 1, padding: 16, backgroundColor: "#F0EBF8" },
-          headerStyle: { backgroundColor: "#673AB8" },
-          headerTitleStyle: { color: "white" },
-          headerTintColor: "#F0EBF8"
+          contentStyle: { flex: 1, padding: 16, backgroundColor: theme.colors.background.cloud },
+          headerStyle: { backgroundColor: theme.colors.background.accent },
+          headerTitleStyle: { color: theme.colors.white },
+          headerTintColor: theme.colors.text.secondary
         }}
       >
         <Stack.Screen

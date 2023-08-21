@@ -1,12 +1,20 @@
-import { Link } from 'expo-router'
+import { useRouter } from 'expo-router'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
+import { Button } from "react-native-paper";
+
 const PersonalDetails = () => {
+  const router = useRouter();
+
+  const handleNavigation = () => {
+    router.push("/checkout/delivery");
+  }
+
   return (
     <View>
       <Text style={styles.h1}>PersonalDetails</Text>
-      <Link href={"checkout/delivery"}>Go to delivery</Link>
+      <Button onPress={handleNavigation} mode="contained">Next</Button>
     </View>
   )
 }

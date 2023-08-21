@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
+        <Text style={styles.title}>Forms app</Text>
         <Link href={"/checkout"} style={styles.subtitle}>Start</Link>
       </View>
     </View>
