@@ -16,7 +16,7 @@ const CheckoutStack = () => {
         }}
       >
         <Stack.Screen
-          name='index'
+          name='personal'
           options={{
             title: "Personal information"
           }} />
