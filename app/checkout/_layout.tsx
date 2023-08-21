@@ -1,7 +1,7 @@
 import React from 'react'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { theme } from '../common/theme'
+import { theme } from '../../src/common/theme';
 
 const CheckoutStack = () => {
   return (
