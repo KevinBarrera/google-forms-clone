@@ -2,10 +2,11 @@ import React from 'react'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { theme } from '../../src/common/theme';
+import CheckoutContextProvider from '../../src/contexts/CheckoutContext';
 
 const CheckoutStack = () => {
   return (
-    <>
+    <CheckoutContextProvider>
       <StatusBar style='light' />
       <Stack
         screenOptions={{
@@ -31,7 +32,7 @@ const CheckoutStack = () => {
             title: "Payment information"
           }} />
       </Stack>
-    </>
+    </CheckoutContextProvider>
   )
 }
 

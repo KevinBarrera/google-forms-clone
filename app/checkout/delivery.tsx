@@ -6,6 +6,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DeliveryInfoSchema, DeliveryInformation } from '../../src/schema/checkout.schema';
 import ControlledInput from '../../src/common/components/ControlledInput';
+import { useCheckoutContext } from '../../src/contexts/CheckoutContext';
 
 const Delivery = () => {
   const { control, handleSubmit } = useForm<DeliveryInformation>({
@@ -16,7 +17,10 @@ const Delivery = () => {
   const router = useRouter();
   const theme = useTheme();
 
-  const handleNavigation = () => {
+  const { setDeliveryInfo } = useCheckoutContext();
+
+  const handleNavigation = (data: DeliveryInformation) => {
+    setDeliveryInfo(data);
     router.push("/checkout/payment")
   };
 

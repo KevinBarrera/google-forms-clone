@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PersonalInfoSchema, PersonalInformation } from '../../src/schema/checkout.schema';
 import ControlledInput from '../../src/common/components/ControlledInput';
+import { useCheckoutContext } from '../../src/contexts/CheckoutContext';
 
 const PersonalDetails = () => {
   const { control, handleSubmit } = useForm<PersonalInformation>({
@@ -16,7 +17,10 @@ const PersonalDetails = () => {
   const router = useRouter();
   const theme = useTheme()
 
-  const handleNavigation = () => {
+  const { setPersonalInfo } = useCheckoutContext();
+
+  const handleNavigation = (data: PersonalInformation) => {
+    setPersonalInfo(data);
     router.push("/checkout/delivery");
   }
 

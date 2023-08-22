@@ -6,6 +6,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PaymentInfoSchema, PaymentInformation } from '../../src/schema/checkout.schema';
 import ControlledInput from '../../src/common/components/ControlledInput';
+import { useCheckoutContext } from '../../src/contexts/CheckoutContext';
 
 const Payment = () => {
   const { control, handleSubmit } = useForm<PaymentInformation>({
@@ -15,8 +16,10 @@ const Payment = () => {
   const router = useRouter();
   const theme = useTheme();
 
-  const handleSubmitForm = () => {
-    console.log("Some submit logic executed");
+  const { onSubmitAll } = useCheckoutContext();
+
+  const handleSubmitForm = (data: PaymentInformation) => {
+    onSubmitAll(data);
     router.push("/");
   };
 
