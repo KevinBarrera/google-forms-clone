@@ -1,5 +1,5 @@
 import { StyleSheet, ScrollView, View } from 'react-native'
-import React, { useState } from 'react'
+import React from 'react'
 import { useRouter } from 'expo-router'
 import { Button, Card, RadioButton, HelperText, useTheme } from "react-native-paper";
 import { useForm, Controller } from "react-hook-form";
