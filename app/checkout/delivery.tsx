@@ -1,13 +1,20 @@
-import { StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView, View } from 'react-native'
 import React, { useState } from 'react'
 import { useRouter } from 'expo-router'
-import { Button, Card, TextInput, RadioButton, useTheme } from "react-native-paper";
+import { Button, Card, RadioButton, HelperText, useTheme } from "react-native-paper";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { DeliveryInfoSchema, DeliveryInformation } from '../../src/schema/checkout.schema';
+import ControlledInput from '../../src/common/components/ControlledInput';
 
 const Delivery = () => {
+  const { control, handleSubmit } = useForm<DeliveryInformation>({
+    resolver: zodResolver(DeliveryInfoSchema),
+    defaultValues: { shipping: "free" },
+  })
+
   const router = useRouter();
   const theme = useTheme();
-
-  const [shipping, setShipping] = useState("free");
 
   const handleNavigation = () => {
     router.push("/checkout/payment")
@@ -18,22 +25,46 @@ const Delivery = () => {
       <Card style={{ backgroundColor: theme.colors.background }}>
         <Card.Title title="Deliver address" titleVariant="titleLarge" />
         <Card.Content style={{ gap: 8 }}>
-          <TextInput placeholder='City' label="City" style={{ backgroundColor: theme.colors.background }} />
-          <TextInput placeholder='12345' label="Postal Code" style={{ backgroundColor: theme.colors.background }} />
-          <TextInput placeholder='Address' label="Adress" style={{ backgroundColor: theme.colors.background }} />
+          <ControlledInput
+            control={control}
+            name="city"
+            label="City"
+            placeholder="New York"
+          />
+          <ControlledInput
+            control={control}
+            name="postalCode"
+            label="Postal Code"
+            placeholder="12345"
+          />
+          <ControlledInput
+            control={control}
+            name="address"
+            label="Address"
+            placeholder="Bank street #303, Apt. 41"
+          />
         </Card.Content>
       </Card>
       <Card style={{ backgroundColor: theme.colors.background }}>
         <Card.Title title="Shipping options" titleVariant='titleLarge' />
         <Card.Content>
-          <RadioButton.Group value={shipping} onValueChange={setShipping}>
-            <RadioButton.Item label='Free' value='free' />
-            <RadioButton.Item label='Fast' value='fast' />
-            <RadioButton.Item label='Same day' value='sameDay' />
-          </RadioButton.Group>
+          <Controller
+            control={control}
+            name="shipping"
+            render={({ field: { value, onChange }, fieldState: { invalid, error } }) => (
+              <View>
+                <RadioButton.Group value={value} onValueChange={onChange}>
+                  <RadioButton.Item label='Free' value='free' />
+                  <RadioButton.Item label='Fast' value='fast' />
+                  <RadioButton.Item label='Same day' value='same_day' />
+                </RadioButton.Group>
+                <HelperText type='error' visible={invalid}>{error?.message}</HelperText>
+              </View>
+            )}
+          />
         </Card.Content>
       </Card>
-      <Button onPress={handleNavigation} mode='contained'>Next</Button>
+      <Button onPress={handleSubmit(handleNavigation)} mode='contained'>Next</Button>
     </ScrollView>
   )
 }

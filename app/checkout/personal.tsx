@@ -9,7 +9,7 @@ import { PersonalInfoSchema, PersonalInformation } from '../../src/schema/checko
 import ControlledInput from '../../src/common/components/ControlledInput';
 
 const PersonalDetails = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm<PersonalInformation>({
+  const { control, handleSubmit } = useForm<PersonalInformation>({
     resolver: zodResolver(PersonalInfoSchema)
   });
 
