@@ -19,6 +19,10 @@ export const PaymentInfoSchema = z.object({
   saveInfo: z.boolean(),
 });
 
+export const CheckoutSchema =
+  PersonalInfoSchema.merge(DeliveryInfoSchema).merge(PaymentInfoSchema);
+
 export type PersonalInformation = z.infer<typeof PersonalInfoSchema>;
 export type DeliveryInformation = z.infer<typeof DeliveryInfoSchema>;
 export type PaymentInformation = z.infer<typeof PaymentInfoSchema>;
+export type CheckoutData = z.infer<typeof CheckoutSchema>;

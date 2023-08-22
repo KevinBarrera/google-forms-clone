@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
-import { PersonalInformation, DeliveryInformation, PaymentInformation } from "../schema/checkout.schema";
+import { PersonalInformation, DeliveryInformation, PaymentInformation, CheckoutData } from "../schema/checkout.schema";
 
 type CheckoutContextType = {
   setPersonalInfo: React.Dispatch<React.SetStateAction<PersonalInformation | null>>
@@ -24,10 +24,8 @@ const CheckoutContextProvider = ({ children }) => {
     if (data) {
       setPaymentInfo(data);
       if (personalInfo && deliveryInfo) {
-        console.log("Submitting all");
-        console.log("personalInfo: ", personalInfo);
-        console.log("deliveryInfo: ", deliveryInfo);
-        console.log("paymentInfo: ", data);
+        const checkoutData: CheckoutData = { ...personalInfo, ...deliveryInfo, ...data }
+        console.log("Submitting all: ", checkoutData);
       }
     }
   }, [personalInfo, deliveryInfo]);
